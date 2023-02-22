@@ -3,6 +3,10 @@ export interface User {
   financialCredit : Number,
   password : String,
   profilePicture : String,
-  phoneNumbers : Number[],
+  phoneNumbers : String[],
 
+}
+
+export interface UserEditCredit {
+  financialCredit : string
 }
