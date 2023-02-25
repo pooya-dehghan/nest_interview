@@ -47,7 +47,7 @@ describe('AuthService', () => {
       }
        try{
         const signupResult = await service.signup(signupPayload);
-         let expectedRes = signupPayload;
+        let expectedRes = signupPayload;
         delete expectedRes.password;  
         expect(signupResult).toMatchObject(expectedRes)
       }catch(e){
@@ -76,7 +76,6 @@ describe('AuthService', () => {
         const signInRes = await service.signin(signinUser);
         expect(signInRes).toBeDefined();
       }catch(e){
-        console.log('e: ',e)
         expect(e).toBeInstanceOf(ForbiddenException);
       }
     })
