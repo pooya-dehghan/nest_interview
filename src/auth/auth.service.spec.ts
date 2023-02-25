@@ -55,4 +55,42 @@ describe('AuthService', () => {
       }
     })
   })
+  describe('signin' , () => {
+    it('if user doesnt exist in database throw error not found', async () => {
+      const signinUser = {
+        email : faker.internet.email(),
+        password : faker.random.words(),
+      }
+      try{
+        const signInRes = await service.signin(signinUser);
+      }catch(e){
+        expect(e).toBeInstanceOf(ForbiddenException);
+      }
+    })
+    it('if user exist in database return the token string from server', async () => {
+      const signinUser = {
+        email : 'pooyadehghan@yahoo.com',
+        password : '123321',
+      }
+      try{
+        const signInRes = await service.signin(signinUser);
+        expect(signInRes).toBeDefined();
+      }catch(e){
+        console.log('e: ',e)
+        expect(e).toBeInstanceOf(ForbiddenException);
+      }
+    })
+    it('if user exist and pssword is wrong throw error' , async () => {
+      const signUser = {
+        email : 'pooyadehghan@yahoo.com',
+        password : '321123',
+      }
+      try{
+        const signInRes = await service.signin(signUser);
+        expect(signInRes).toBeDefined();
+      }catch(e){
+        expect(e).toBeInstanceOf(ForbiddenException);
+      }
+    })
+  })
 });

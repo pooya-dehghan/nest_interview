@@ -66,6 +66,8 @@ export class AuthService {
           secret : secret
         })
         return token
+      }else{
+        throw new ForbiddenException('رمز عبور اشتباه است')
       }
     } 
 }
