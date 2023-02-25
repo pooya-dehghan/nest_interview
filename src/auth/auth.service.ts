@@ -1,4 +1,4 @@
-import { Injectable , ForbiddenException } from '@nestjs/common';
+import { Injectable , ForbiddenException ,NotAcceptableException } from '@nestjs/common';
 import {PrismaService} from '../prisma/prisma.service'
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
@@ -23,7 +23,7 @@ export class AuthService {
       }) 
       //if was there message with alerady exists
       if(user.length) {
-        throw new ForbiddenException('کاربر با این ایمیل وجود دارد.')
+        throw new NotAcceptableException('کاربر با این ایمیل وجود دارد.')
       }
       else {
         const salt = await bcrypt.genSalt(10);

@@ -1,15 +1,14 @@
-import { Injectable , ForbiddenException } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { Injectable , ForbiddenException ,NotAcceptableException ,NotFoundException} from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class UserService {
   constructor(private prismaService : PrismaService){}
   async editUserCredit(newFinancialCredit: string , id : number) {
-    let mynumb = 10;
     let FinancialCreditConvertedToEng = this.convertToEngNumb(newFinancialCredit);
     let isnum = this.isNumeric(FinancialCreditConvertedToEng);
     if(!isnum){
-      throw new ForbiddenException('امکان مقدار دهی جدید وجود ندارد لطفا از اعداد استفاده کنید.')
+      throw new NotAcceptableException('امکان مقدار دهی جدید وجود ندارد لطفا از اعداد استفاده کنید.')
       return
     }
     let user =  await this.prismaService.user.findUnique({
@@ -18,7 +17,7 @@ export class UserService {
       }
     })
     if(!user){
-      throw new ForbiddenException('کاربر با این ایمیل وجود ندارد')
+      throw new NotFoundException('کاربر با این ایمیل وجود ندارد')
     }else{
       const finanacialCreditNum = Number(FinancialCreditConvertedToEng);
       const updateUser = await this.prismaService.user.update({

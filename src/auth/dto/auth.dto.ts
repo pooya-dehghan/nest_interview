@@ -30,7 +30,7 @@ export class UserDto {
   @IsNumber()
   @IsPositive()
   @IsNotEmpty()
-  financialCredit : number
+  financialCredit : string
 
   @IsArray()
   phoneNumbers : string[]
