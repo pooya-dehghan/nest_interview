@@ -17,7 +17,7 @@ export class UserService {
       }
     })
     if(!user){
-      throw new NotFoundException('کاربر با این ایمیل وجود ندارد')
+      throw new NotFoundException('کاربر با این آیدی وجود ندارد')
     }else{
       const finanacialCreditNum = Number(FinancialCreditConvertedToEng);
       const updateUser = await this.prismaService.user.update({
